@@ -51,11 +51,21 @@ class ClusterChart {
     }
 
     render(){
+
+            //titles 
+            noStroke();
+            fill(this.titleColor);
+            textSize(this.titleSize);
+            textAlign(CENTER, CENTER);
+            text(
+                this.titleText,
+                this.w / 2,
+                this.h - this.titleYOffset
+            );
    
-    	this.gap = (this.w - (cleanData.length * this.barWidth * this.yAxisValue.length)) / (cleanData.length + 1);
+    this.gap = (this.w - (cleanData.length * this.barWidth * this.yAxisValue.length)) / (cleanData.length + 1);
 
-
-	let maxValues = [];
+    let maxValues = [];
 	this.yAxisValue.forEach((value) => {
 		maxValues.push(cleanData.map((row) => row[value]));
 	});
@@ -66,6 +76,30 @@ class ClusterChart {
 
 	push();
 	translate(this.x, this.y);
+    
+
+    let tickGap = this.h / this.numTicks;
+    for (let i = 0; i <= this.numTicks; i++) {
+        noFill();
+        stroke(this.tickColor);
+        strokeWeight(this.tickStrokeWeight);
+        let y = map(i, 0, this.numTicks, 0, -this.h);
+
+        line(0, -i * tickGap, -this.tickStrokeLength, -i * tickGap);
+
+        // Tick decimals and controlling how it looks
+        noStroke();
+        fill(this.tickTextColor);
+        textFont('Inter');
+        textAlign(RIGHT, CENTER);
+        textSize(this.tickTextSize);
+        let value = (maxValue / this.numTicks) * i;
+        text(
+            value.toFixed(this.tickDecimals),
+            -this.tickPadding - this.tickStrokeLength,
+            -i * tickGap
+        );
+    }
 
 	push();
 	translate(this.margin, 0);
@@ -76,8 +110,9 @@ class ClusterChart {
 
 		for (let j = 0; j < this.yAxisValue.length; j++) {
 			noStroke();
-			fill(color(this.barColor[j % this.barColor.length])); 
-			rect(this.barWidth * j, 0, this.barWidth, -cleanData[i][this.yAxisValue[j]] * scaler);
+            fill(this.barColor[j % this.barColor.length]);
+            rect(this.barWidth * j, 0, this.barWidth, -cleanData[i][this.yAxisValue[j]] * scaler);
+            
 
             noStroke();
             fill(this.tickTextColor);
@@ -103,6 +138,8 @@ class ClusterChart {
 	line(0, 0, this.w, 0);
 
 	pop();
+
+    
     
     }
 }

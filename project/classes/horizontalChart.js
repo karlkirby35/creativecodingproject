@@ -49,14 +49,15 @@ class HorizontalBarChart {
         push();
         translate(this.x, this.y);
         
-        // Title
+        // title
         noStroke();
         fill(this.titleColor);
         textSize(this.titleSize);
+        textFont('Inter');
         textAlign(CENTER, CENTER);
         text(this.titleText, this.w / 2, -this.titleYOffset);
 
-        // Scaling for bar width (based on max value in data)
+        // scaling for bar width (based on max value in data)
         let maxValue = 0;
 
         for (let i = 0; i < this.data.length; i++) {
@@ -68,32 +69,33 @@ class HorizontalBarChart {
         let scale = this.w / maxValue;
         let barGap = (this.h - (this.numBars * this.barWidth)) / (this.numBars + 1); //bars spaced out 
 
-        // Draw bars
+        // draw bars
         for (let i = 0; i < this.numBars; i++) {
             let yPos = (barGap * (i + 1)) + (this.barWidth * i); 
             let barLength = this.data[i][this.yAxisValue] * scale;
 
-            // Bar
+            // bar
             stroke(this.barStrokeColor);
             strokeWeight(this.barStrokeThickness);
             fill(this.barColor);
             rect(0, yPos, barLength, this.barWidth); //bars start at 0 
 
-            // Labels
+            // labels
             noStroke();
             fill(this.labelColor);
             textSize(this.tickTextSize);
+            textFont('Inter');
             textAlign(RIGHT, CENTER); 
             text(this.data[i][this.xAxisLabel], -this.labelPadding, yPos + this.barWidth / 2);
         }
 
-        // Draw axis lines
+        // draw axis lines
         stroke(this.axisLineColor);
         strokeWeight(this.axisLineThickness);
-        line(0, 0, 0, this.h); // Y-axis
-        line(0, this.h, this.w, this.h); // X-axis
+        line(0, 0, 0, this.h); // y-axis
+        line(0, this.h, this.w, this.h); // x-axis
 
-        // Draw ticks on X-axis
+        // draw ticks on X-axis
         for (let i = 0; i <= this.numTicks; i++) {
             let x = map(i, 0, this.numTicks, 0, this.w);
             
@@ -101,10 +103,11 @@ class HorizontalBarChart {
             strokeWeight(this.tickStrokeWeight);
             line(x, this.h, x, this.h + this.tickStrokeLength);
 
-            // Tick labels
+            // tick labels
             noStroke();
             fill(this.tickTextColor);
             textSize(this.tickTextSize);
+            textFont('Inter');
             textAlign(CENTER, TOP);
             let value = (maxValue / this.numTicks) * i;
             text(value.toFixed(this.tickDecimals), x, this.h + this.tickStrokeLength + this.tickPadding);

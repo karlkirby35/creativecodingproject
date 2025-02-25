@@ -87,7 +87,7 @@ class StackedChart {
                 // Bar details
                 stroke(this.barStrokeColor);
                 strokeWeight(this.barStrokeThickness);
-                fill(this.barColor[j]);
+                fill(this.barColor[j % this.barColor.length]);
                 rect(jump, -currentY, this.barWidth, -barHeight);
                 currentY += barHeight;
             }
@@ -96,6 +96,7 @@ class StackedChart {
             noStroke();
             fill(this.labelColor);
             textSize(this.tickTextSize);
+            textFont('Inter');
             textAlign(LEFT, CENTER); 
             let labels = this.data.map((x) => x[this.xAxisLabel]);
 

@@ -70,7 +70,7 @@ class BarChart {
         let barGap = (this.w - (this.numBars * this.barWidth)) / (this.numBars + 1);
 
         let maxValue = max(this.data.map((x) => x[this.yAxisValue]))
-        
+
         let scale = this.h / maxValue;
         
         for (let i = 0; i < this.numBars; i++) {
@@ -93,6 +93,7 @@ class BarChart {
         //labels
         noStroke();
         fill(this.labelColor);
+        textFont('Inter');
         textSize(this.tickTextSize);
         textAlign(LEFT, CENTER);
         let labels = this.data.map((x) => x[this.xAxisLabel]);
@@ -121,6 +122,7 @@ class BarChart {
         //tick decimals and controlling how it looks
         noStroke();
         fill(this.tickTextColor);
+        textFont('Inter');
         textAlign(RIGHT, CENTER);
         textSize(this.tickTextSize);
         let value = (maxValue / this.numTicks) * i

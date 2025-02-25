@@ -3,20 +3,35 @@ let data;
 let cleanData = [];
 let barCharts = [];
 
+//new variables
+let myNewArray;
+let total;
+let font;
+
+
 //preloader
 function preload() {
     data = loadTable("data/six_nations.csv", "csv", "header");
+    font = loadFont('Poppins/Poppins-Black.ttf');
+    
 }
 
 //setup function
 function setup() {
-    createCanvas(1800, 1800);
+    createCanvas(2000, 1800);
+    pixelDensity(2); 
+    smooth(); 
     background("#000000");
     angleMode(DEGREES);
     cleanedData(); 
     
 // For Stacked Chart Colours
-  
+
+//custom chart 
+myNewArray = cleanData.map(row => row.Grand_Slams);
+total = myNewArray.reduce((sum, value) => sum + value, 0);
+
+
 //for loop for collecting data in cleanData
     /*noLoop();
     for (let i = 0; i < data.rows.length; i++) {
@@ -37,7 +52,7 @@ function setup() {
 //other_wins = wins not achieving grand slams
 
 //barchart 1
-    let sixNationsChart1 = {
+let sixNationsChart1 = {
         x: 80, 
         y: 350,
         w: 400, 
@@ -72,7 +87,7 @@ function setup() {
     };
    
 //barchart 2
-    let sixNationsChart2 = {
+let sixNationsChart2 = {
         x: 600, 
         y: 350,
         w: 400, 
@@ -107,7 +122,7 @@ function setup() {
     };
 
 //barchart 3
-    let sixNationsChart3 = {
+let sixNationsChart3 = {
         x: 1120, 
         y: 350,
         w: 400, 
@@ -176,7 +191,7 @@ let sixNationsStacked ={
     labelRotation: 60,
     labelTextSize: 6,
     labelColor: "#ffffff", 
-}
+    };
 
 //horizontal barchart
 let sixNationsHorizontal = {
@@ -212,7 +227,7 @@ let sixNationsHorizontal = {
     labelRotation: 60,
     labelTextSize: 6,
     labelColor: "#ffffff", 
-}
+    };
 
 //cluster barchart
 let sixNationsCluster = {
@@ -227,18 +242,18 @@ let sixNationsCluster = {
     axisLineColor: "#ffffff", 
     axisLineThickness: 5,
     barWidth: 25,
-    barColor: ["d899f0", "3357ff"], 
+    barColor: ["#d899f0", "#3357ff"],
     barStrokeThickness: 0,
     barStrokeColor: "#fafafa",
     margin: 50,
     titleText: "Six Nations Cluster", 
     titleXOffset: -30,
-    titleYOffset: 550,
+    titleYOffset: 250,
     titleWidth: 300,
     titleSize: 14,
     titleColor: "#ffffff", 
     tickColor: "#ffffff", 
-    tickStrokeWeight: 0,
+    tickStrokeWeight: 1,
     tickStrokeLength: 20,
     tickPadding: 10,
     numTicks: 5,
@@ -251,6 +266,43 @@ let sixNationsCluster = {
     labelColor: "#ffffff", 
 }
 
+//(my own design)
+let sixNationsCustom = {
+    x: 800,
+    y: 1300, 
+    w: 500, 
+    h: 500, 
+    data: cleanData,
+    yAxisValue: ["Grand_Slams"], 
+    xAxisLabel: "Team",
+    axisLineColor: "#ffffff", 
+    axisLineThickness: 2,
+    barColor: ["#d899f0", "#3357ff", "#ff7f7f", "#7df9ff", "#d8ffb1", "#ffa071"], 
+    titleText: "Six Nations Grand Slams:", 
+    titleXOffset: -30,
+    titleYOffset: 80,
+    titleWidth: 300,
+    titleSize: 14,
+    titleColor: "#ffffff", 
+    tickColor: "#ffffff", 
+    tickStrokeWeight: 1,
+    tickStrokeLength: 20,
+    tickPadding: 10,
+    numTicks: 5,
+    tickTextColor: "#ffffff", 
+    tickTextSize: 10,
+    tickDecimals: 1,
+    labelPadding: 11,
+    labelRotation: 0, 
+    labelTextSize: 12,
+    labelColor: "#ffffff", 
+    myNewArray, //new
+    total, //new
+    font, //new
+    innerRadiusColor: "#000000" //new
+};
+
+
 //pushing the barcharts
     barCharts.push(new BarChart(sixNationsChart1));
     barCharts.push(new BarChart(sixNationsChart2));
@@ -258,6 +310,7 @@ let sixNationsCluster = {
     barCharts.push(new StackedChart(sixNationsStacked));
     barCharts.push(new HorizontalBarChart(sixNationsHorizontal));
     barCharts.push(new ClusterChart(sixNationsCluster));
+    barCharts.push(new CustomChart(sixNationsCustom));
     
 }
 
