@@ -43,7 +43,7 @@ total = myNewArray.reduce((sum, value) => sum + value, 0);
         cleanData[i].Wins = parseInt(cleanData[i].Wins)
         cleanData[i].Grand_Slams = parseInt(cleanData[i].Grand_Slams)
         cleanData[i].Other_Wins = parseInt(cleanData[i].Other_Wins)
-}
+}_
         */
 
 //declaring barchart with objects inside:
@@ -248,7 +248,7 @@ let sixNationsCluster = {
     margin: 50,
     titleText: "Six Nations Cluster", 
     titleXOffset: -30,
-    titleYOffset: 250,
+    titleYOffset: 900,
     titleWidth: 300,
     titleSize: 14,
     titleColor: "#ffffff", 

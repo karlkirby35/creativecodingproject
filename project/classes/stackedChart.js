@@ -122,6 +122,7 @@ class StackedChart {
             // Draw tick labels
             noStroke();
             fill(this.tickTextColor);
+            textFont('Inter');
             textAlign(RIGHT, CENTER);
             textSize(this.tickTextSize);
             let value = (totalMax / this.numTicks) * i;

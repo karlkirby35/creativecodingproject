@@ -53,12 +53,12 @@ class CustomChart {
         translate(this.x, this.y);
 
         // Titles
-fill(this.titleColor);
-textSize(this.titleSize);
-textFont('Inter');
-textFont(this.font);
-textAlign(CENTER, CENTER);
-text(this.titleText, 0, -this.radius - this.titleYOffset);
+        fill(this.titleColor);
+        textSize(this.titleSize);
+        textFont('Inter');
+        textFont(this.font);
+        textAlign(CENTER, CENTER);
+        text(this.titleText, 0, -this.radius - this.titleYOffset);
 
 
         //arcs
